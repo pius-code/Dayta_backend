@@ -53,7 +53,7 @@ A FastAPI-based backend service that allows Africans to buy mobile data from dif
 **Development mode with auto-reload:**
 
 ```bash
-python main.py
+python main.py or uv run main.py
 ```
 
 The server will start on `http://localhost:8080`
