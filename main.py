@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from route import router as api_router
 import uvicorn
+from middleware.auth import verify_token
 
 app = FastAPI(
     title="Dayta Backend",
@@ -8,6 +9,8 @@ app = FastAPI(
     mobile data provded you have a provider. An open source project feel free
     to use! """,
 )
+
+app.middleware("http")(verify_token)
 
 app.include_router(api_router)
 
