@@ -15,7 +15,7 @@ primary_region = "cdg"
 
 [processes]
   # Use uvicorn to start the FastAPI app
-  app = "uvicorn main:app --host 0.0.0.0 --port 8000"
+  app = "uvicorn main:app --host 0.0.0.0 --port 8080"
 
 [[vm]]
   memory = "1gb"
