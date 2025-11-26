@@ -6,16 +6,24 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-SECRET_KEY = os.getenv("NEXTAUTH_SECRET", "DEV_SECRET")
+SECRET_KEY = os.getenv("AUTH_SECRET")
 ALGORITHM = "HS256"
 
 
 async def verify_token(request: Request, call_next):
-    public_paths = ["/", "/check_balance/"]
-    if request.url.path in public_paths:
+    public_paths = [
+        "/",
+        "/check_balance/",
+        "/docs",
+        "/openapi.json",
+        "/webhook",  # <-- Add this
+        "/webhook/",
+    ]  # noqa
+    # Skip auth for OPTIONS requests (CORS preflight)
+    if request.method == "OPTIONS" or request.url.path in public_paths:
         return await call_next(request)
 
-    auth_header = request.headers.get("Authorzation")
+    auth_header = request.headers.get("Authorization")
     if not auth_header or not auth_header.startswith("Bearer "):
         return JSONResponse(
             status_code=401, content={"detail": "Missing or invalid token"}

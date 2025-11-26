@@ -14,9 +14,10 @@ async def safe_get(url: str, headers: Optional[dict] = None):
             try:
                 return response.json()
             except ValueError:
-                return response.text
+                return {"error": "Invalid JSON response", "raw": response.text}
     except Exception as e:
         print(e)
+        return {"error": str(e)}
 
 
 async def safe_post(
@@ -33,8 +34,9 @@ async def safe_post(
             try:
                 return response.json()
             except ValueError:
-                return response.text
+                return response.json()
     except Exception as e:
         if hasattr(e, "response") and e.response is not None:
-            print("Error response:", e.response.text)
+            print("Error responser:", e.response.text)
         print(e)
+        return {"error": str(e.response.text)}
