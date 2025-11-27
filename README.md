@@ -1,5 +1,7 @@
 # Dayta Backend
 
+## 1.0 docs
+
 A FastAPI-based backend service that allows Africans to buy mobile data from different vendors at competitive pricing. This backend enables you to integrate Dayta's services into your application.
 
 ## 🚀 Features
@@ -143,6 +145,13 @@ curl -X POST http://localhost:8080/buy/ \
 - **python-dotenv**: Environment variable management
 - **pydantic**: Data validation using Python type annotations
 
+## version 2.0
+
+added datahub provider since it seems thy support vodafone, airteltigo and mtn.
+also moved buying data logic to webhook. So now the buy and buy_x endpoint just helps you process payment and takes in info, webhook inteligently handles the rest
+
+Also the main provider is now datahub.... Will build an intelligent provider selector in the future versions
+
 ## 🤝 Contributing
 
 This is an open-source project. Feel free to:
@@ -160,10 +169,10 @@ This is an open-source project. Feel free to:
 
 ## 🔜 Roadmap
 
-- [ ] Add support for more providers
-- [ ] Add support for Vodafone network
+- [x] Add support for more providers
+- [x] Add support for Vodafone network
 - [ ] Implement transaction history endpoint
-- [ ] Add rate limiting
+- [x] Add rate limiting(provider already does this)
 - [ ] Add authentication/API key management
 - [ ] Add comprehensive error handling
 - [ ] Add unit tests
@@ -192,3 +201,8 @@ Open source - feel free to use and modify!
 ---
 
 **Made with PiLaDo for affordable data access in Africa**
+
+TODO -
+
+1. [ ] Format the order_store, for now it stores the references and their states. What if 10000 users buy on the server... that array/object/DS will become very huge and soon it will take minutes to process. Maybe use a fast cache or a fast database. I feel like a database might be slow... Maybe Mongidb because it is free.
+2. [ ] Add more providers. Maybe make an intelligent provider selector that selects the best provider based on network, volume, price, and availability

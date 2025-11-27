@@ -1,5 +1,5 @@
 import httpx
-from core.headers import headers as default_headers
+from core.headers import headers2 as default_headers
 from typing import Optional
 
 
